@@ -15,11 +15,9 @@ void film::save(){
         std::fstream plik;
         plik.open("seriale.txt",std::ios::out);
         if (plik.fail()){
-            {
             blad<std::string> bl;
             bl.setmessage("Nie udało się otworzyć pliku.\n");
             throw bl;}
-        }
         plik<<PEGI;
         plik.close();
     } catch (blad<std::string> bl) {
@@ -67,5 +65,6 @@ void film::prezentujsie(){
 
 void film::setinfo(std::string name, std::string gat, double EpisodeTime, int wiek){
     ogladadlo::setinfo(name, gat, EpisodeTime);
+    typ='F';
     PEGI=wiek;
 }

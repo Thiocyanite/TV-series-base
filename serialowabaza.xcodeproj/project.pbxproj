@@ -11,6 +11,9 @@
 		84329DAF2191E701004CA9D6 /* ogladadlo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DAE2191E701004CA9D6 /* ogladadlo.cpp */; };
 		84329DB12191EEB1004CA9D6 /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DB02191EEB1004CA9D6 /* event.cpp */; };
 		84329DB52191F25C004CA9D6 /* film.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DB42191F25C004CA9D6 /* film.cpp */; };
+		84329DB72191F660004CA9D6 /* serial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DB62191F660004CA9D6 /* serial.cpp */; };
+		84329DBB2191F760004CA9D6 /* zakonczony.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DBA2191F760004CA9D6 /* zakonczony.cpp */; };
+		84329DBD2192102E004CA9D6 /* trwajacy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DBC2192102E004CA9D6 /* trwajacy.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +38,12 @@
 		84329DB22191EEBB004CA9D6 /* event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
 		84329DB32191F24E004CA9D6 /* film.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = film.h; sourceTree = "<group>"; };
 		84329DB42191F25C004CA9D6 /* film.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = film.cpp; sourceTree = "<group>"; };
+		84329DB62191F660004CA9D6 /* serial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = serial.cpp; sourceTree = "<group>"; };
+		84329DB82191F66E004CA9D6 /* serial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = serial.h; sourceTree = "<group>"; };
+		84329DB92191F752004CA9D6 /* zakonczony.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zakonczony.h; sourceTree = "<group>"; };
+		84329DBA2191F760004CA9D6 /* zakonczony.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = zakonczony.cpp; sourceTree = "<group>"; };
+		84329DBC2192102E004CA9D6 /* trwajacy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = trwajacy.cpp; sourceTree = "<group>"; };
+		84329DBE2192103C004CA9D6 /* trwajacy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trwajacy.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +77,14 @@
 			isa = PBXGroup;
 			children = (
 				84329DA52191E495004CA9D6 /* main.cpp */,
+				84329DBC2192102E004CA9D6 /* trwajacy.cpp */,
+				84329DBE2192103C004CA9D6 /* trwajacy.h */,
+				84329DB92191F752004CA9D6 /* zakonczony.h */,
+				84329DBA2191F760004CA9D6 /* zakonczony.cpp */,
 				84329DB32191F24E004CA9D6 /* film.h */,
 				84329DB42191F25C004CA9D6 /* film.cpp */,
+				84329DB62191F660004CA9D6 /* serial.cpp */,
+				84329DB82191F66E004CA9D6 /* serial.h */,
 				84329DB02191EEB1004CA9D6 /* event.cpp */,
 				84329DB22191EEBB004CA9D6 /* event.h */,
 				84329DAD2191E6EE004CA9D6 /* ogladadlo.h */,
@@ -135,9 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84329DBD2192102E004CA9D6 /* trwajacy.cpp in Sources */,
 				84329DA62191E495004CA9D6 /* main.cpp in Sources */,
+				84329DBB2191F760004CA9D6 /* zakonczony.cpp in Sources */,
 				84329DB52191F25C004CA9D6 /* film.cpp in Sources */,
 				84329DB12191EEB1004CA9D6 /* event.cpp in Sources */,
+				84329DB72191F660004CA9D6 /* serial.cpp in Sources */,
 				84329DAF2191E701004CA9D6 /* ogladadlo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
