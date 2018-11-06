@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		84329DA62191E495004CA9D6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DA52191E495004CA9D6 /* main.cpp */; };
+		84329DAF2191E701004CA9D6 /* ogladadlo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DAE2191E701004CA9D6 /* ogladadlo.cpp */; };
+		84329DB12191EEB1004CA9D6 /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DB02191EEB1004CA9D6 /* event.cpp */; };
+		84329DB52191F25C004CA9D6 /* film.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DB42191F25C004CA9D6 /* film.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,13 @@
 /* Begin PBXFileReference section */
 		84329DA22191E495004CA9D6 /* serialowabaza */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = serialowabaza; sourceTree = BUILT_PRODUCTS_DIR; };
 		84329DA52191E495004CA9D6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		84329DAC2191E4F8004CA9D6 /* blad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blad.h; sourceTree = "<group>"; };
+		84329DAD2191E6EE004CA9D6 /* ogladadlo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ogladadlo.h; sourceTree = "<group>"; };
+		84329DAE2191E701004CA9D6 /* ogladadlo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ogladadlo.cpp; sourceTree = "<group>"; };
+		84329DB02191EEB1004CA9D6 /* event.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
+		84329DB22191EEBB004CA9D6 /* event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		84329DB32191F24E004CA9D6 /* film.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = film.h; sourceTree = "<group>"; };
+		84329DB42191F25C004CA9D6 /* film.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = film.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,13 @@
 			isa = PBXGroup;
 			children = (
 				84329DA52191E495004CA9D6 /* main.cpp */,
+				84329DB32191F24E004CA9D6 /* film.h */,
+				84329DB42191F25C004CA9D6 /* film.cpp */,
+				84329DB02191EEB1004CA9D6 /* event.cpp */,
+				84329DB22191EEBB004CA9D6 /* event.h */,
+				84329DAD2191E6EE004CA9D6 /* ogladadlo.h */,
+				84329DAE2191E701004CA9D6 /* ogladadlo.cpp */,
+				84329DAC2191E4F8004CA9D6 /* blad.h */,
 			);
 			path = serialowabaza;
 			sourceTree = "<group>";
@@ -119,6 +136,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84329DA62191E495004CA9D6 /* main.cpp in Sources */,
+				84329DB52191F25C004CA9D6 /* film.cpp in Sources */,
+				84329DB12191EEB1004CA9D6 /* event.cpp in Sources */,
+				84329DAF2191E701004CA9D6 /* ogladadlo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

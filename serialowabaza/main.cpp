@@ -7,9 +7,16 @@
 //
 
 #include <iostream>
+#include "blad.h"
+#include "ogladadlo.h"
+#include "event.h"
+#include "film.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
+    ogladadlo *obejrzyj;
+    obejrzyj= new ogladadlo;
+    obejrzyj->load();
+    std::cout<<obejrzyj->getname();
     std::cout << "Hello, World!\n";
     return 0;
 }
