@@ -24,22 +24,15 @@ void event::setinfo(std::string name, std::string type, double time, int dzien, 
     else data[1]=1;
 }
 
-void event::load(){
+void event::load(std::fstream & plik){
     try {
-        std::fstream plik;
-        plik.open("seriale.txt",std::ios::in);
-        if (plik.fail()){
-            blad<std::string> bl;
-            bl.setmessage("Nie udało się otworzyć pliku.\n");
-        }
+
         plik>>nazwa>>typ>>CzasTrwania>>data[0]>>data[1];
         if (nazwa==""||typ==""||CzasTrwania==0||data[0]==0||data[1]==0){
             blad<std::string> bl;
             bl.setmessage("Nie zaladowano poprawnie wydarzenia.\n");
             throw bl;}
-        
-        plik.close();
-        
+
     } catch (blad<std::string> bl) {
         bl.showyourself();
         blad<int> wyzszyblad;
@@ -49,18 +42,10 @@ void event::load(){
     
 }
 
-void event::save(){
+void event::save(std::fstream & plik){
     try {
-        std::fstream plik;
-        plik.open("seriale.txt",std::ios::out);
-        if (plik.fail()){
-            blad<std::string> bl;
-            bl.setmessage("Nie udało się otworzyć pliku.\n");
-        }
-        plik<<"E\n"<<nazwa<<"\n"<<typ<<"\n"<<CzasTrwania<<"\n"<<data[0]<<"\n"<<data[1]<<"\n";
-        plik.close();
-    } catch (blad<std::string> bl) {
-        bl.showyourself();
+plik<<"E\n"<<nazwa<<"\n"<<typ<<"\n"<<CzasTrwania<<"\n"<<data[0]<<"\n"<<data[1]<<"\n";
+    } catch (...) {
         blad<int> wyzszyblad;
         wyzszyblad.setmessage(-1);
         throw wyzszyblad;

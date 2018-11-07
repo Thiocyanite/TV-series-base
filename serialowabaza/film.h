@@ -13,9 +13,10 @@
 class film:public ogladadlo{
 private:
     int PEGI;
+    char typ='F';
 public:
-    void save();
-    void load();
+    void save(std::fstream & plik);
+    void load(std::fstream & plik);
     void prezentujsie();
     void setinfo(std::string name, std::string gat, double EpisodeTime, int wiek);
 };

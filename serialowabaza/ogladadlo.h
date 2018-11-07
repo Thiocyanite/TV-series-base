@@ -25,8 +25,9 @@ public:
     double gettime(){return CzasTrwania;};
     std::string getspiese(){return gatunek;};
     std::string getname() {return nazwa;};
-    virtual void save();
-    virtual void load();
+    char gettype(){return typ;}
+    virtual void save(std::fstream & plik);
+    virtual void load(std::fstream & plik);
     bool operator<(ogladadlo const &q)const {return ocena<q.ocena;};
     bool operator<=(ogladadlo const &q)const {return ocena<=q.ocena;};
     bool operator>(ogladadlo const &q)const {return ocena>q.ocena;};

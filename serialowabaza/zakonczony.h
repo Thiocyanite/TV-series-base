@@ -13,10 +13,11 @@
 class zakonczony: public serial { //działa poza load
 private:
     int IloscWyemitowanychOdcinkow;
+    char typ='Z';
 public:
-    void setnumberofepisodes(int n);
-    void save();
-    void load();
+    void setepisodes(int k){IloscWyemitowanychOdcinkow=k;};
+    void save(std::fstream & plik);
+    void load(std::fstream & plik);
     void prezentujsie();
 };
 

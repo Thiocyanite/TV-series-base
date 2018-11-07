@@ -17,15 +17,14 @@ void trwajacy::setemission(int n, int T[]){
         DniEmisji[i]=T[i];
 }
 
-void trwajacy::save(){
+
+void trwajacy::save(std::fstream & plik){
     try {
-        serial::save();
-        std::fstream plik;
-        plik.open("seriale.txt", std::ios::out);
-        if (plik.fail()){
-            blad<std::string> bl;
-            bl.setmessage("Nie udało się otworzyć pliku.\n");
-            throw bl;}
+        serial::save(plik);
+        plik<<IloscOdcinkowTygodniowo<<"\n";
+        for(int i=0;i<IloscOdcinkowTygodniowo;i++)
+            plik<<DniEmisji[i]<<"\n";
+        
     }
     catch(...){
         blad<int> wyzszyblad;
@@ -33,10 +32,8 @@ void trwajacy::save(){
         throw wyzszyblad;
     }
 }
-void trwajacy::load(){
-    serial::load();
-    std::fstream plik;
-    plik.open("seriale.txt", std::ios::in);
+void trwajacy::load(std::fstream & plik){
+    serial::load(plik);
     plik>>IloscOdcinkowTygodniowo;
     DniEmisji= new int[IloscOdcinkowTygodniowo];
     for (int i=0; i<IloscOdcinkowTygodniowo;i++)

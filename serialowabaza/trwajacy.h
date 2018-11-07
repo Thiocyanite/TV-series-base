@@ -13,10 +13,11 @@ class trwajacy: public serial { //działa poza load
 private:
     int IloscOdcinkowTygodniowo;
     int* DniEmisji;
+    char typ = 'T';
 public:
     void setemission(int n, int T[]);
-    void save();
-    void load();
+    void save(std::fstream & plik);
+    void load(std::fstream & plik);
     trwajacy(){};
     ~trwajacy(){delete DniEmisji;};
     void prezentujsie();

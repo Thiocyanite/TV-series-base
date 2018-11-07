@@ -9,20 +9,12 @@
 #include <stdio.h>
 #include <fstream>
 #include "zakonczony.h"
-void zakonczony::setnumberofepisodes(int n){
-    IloscWyemitowanychOdcinkow = n;
-    typ='Z';
-}
 
-void zakonczony::save(){
+
+void zakonczony::save(std::fstream & plik){
     try {
-        serial::save();
-        std::fstream plik;
-        plik.open("seriale.txt", std::ios::out);
-        if (plik.fail()){
-                blad<std::string> bl;
-                bl.setmessage("Nie udało się otworzyć pliku.\n");
-                throw bl;}
+        serial::save(plik);
+        plik<<IloscWyemitowanychOdcinkow<<"\n";
     }
         catch(...){
             blad<int> wyzszyblad;
@@ -30,12 +22,9 @@ void zakonczony::save(){
             throw wyzszyblad;
     }
 }
-void zakonczony::load(){
-    serial::load();
-    std::fstream plik;
-    plik.open("seriale.txt", std::ios::in);
+void zakonczony::load(std::fstream & plik){
+    serial::load(plik);
     plik>>IloscWyemitowanychOdcinkow;
-    plik.close();
 }
 
 void zakonczony::prezentujsie(){

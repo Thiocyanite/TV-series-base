@@ -14,6 +14,8 @@
 		84329DB72191F660004CA9D6 /* serial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DB62191F660004CA9D6 /* serial.cpp */; };
 		84329DBB2191F760004CA9D6 /* zakonczony.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DBA2191F760004CA9D6 /* zakonczony.cpp */; };
 		84329DBD2192102E004CA9D6 /* trwajacy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DBC2192102E004CA9D6 /* trwajacy.cpp */; };
+		84329DC0219212A7004CA9D6 /* uzytkownik.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DBF219212A7004CA9D6 /* uzytkownik.cpp */; };
+		84329DC4219214CE004CA9D6 /* baza.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84329DC3219214CE004CA9D6 /* baza.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +46,10 @@
 		84329DBA2191F760004CA9D6 /* zakonczony.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = zakonczony.cpp; sourceTree = "<group>"; };
 		84329DBC2192102E004CA9D6 /* trwajacy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = trwajacy.cpp; sourceTree = "<group>"; };
 		84329DBE2192103C004CA9D6 /* trwajacy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trwajacy.h; sourceTree = "<group>"; };
+		84329DBF219212A7004CA9D6 /* uzytkownik.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = uzytkownik.cpp; sourceTree = "<group>"; };
+		84329DC1219212B4004CA9D6 /* uzytkownik.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uzytkownik.h; sourceTree = "<group>"; };
+		84329DC2219214C2004CA9D6 /* baza.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = baza.h; sourceTree = "<group>"; };
+		84329DC3219214CE004CA9D6 /* baza.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = baza.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,10 @@
 			isa = PBXGroup;
 			children = (
 				84329DA52191E495004CA9D6 /* main.cpp */,
+				84329DBF219212A7004CA9D6 /* uzytkownik.cpp */,
+				84329DC1219212B4004CA9D6 /* uzytkownik.h */,
+				84329DC2219214C2004CA9D6 /* baza.h */,
+				84329DC3219214CE004CA9D6 /* baza.cpp */,
 				84329DBC2192102E004CA9D6 /* trwajacy.cpp */,
 				84329DBE2192103C004CA9D6 /* trwajacy.h */,
 				84329DB92191F752004CA9D6 /* zakonczony.h */,
@@ -152,10 +162,12 @@
 			files = (
 				84329DBD2192102E004CA9D6 /* trwajacy.cpp in Sources */,
 				84329DA62191E495004CA9D6 /* main.cpp in Sources */,
+				84329DC4219214CE004CA9D6 /* baza.cpp in Sources */,
 				84329DBB2191F760004CA9D6 /* zakonczony.cpp in Sources */,
 				84329DB52191F25C004CA9D6 /* film.cpp in Sources */,
 				84329DB12191EEB1004CA9D6 /* event.cpp in Sources */,
 				84329DB72191F660004CA9D6 /* serial.cpp in Sources */,
+				84329DC0219212A7004CA9D6 /* uzytkownik.cpp in Sources */,
 				84329DAF2191E701004CA9D6 /* ogladadlo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

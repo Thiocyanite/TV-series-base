@@ -23,8 +23,8 @@ public:
     double gettime(){return CzasTrwania;};
     int getday(){return data[0];};
     int getmonth(){return data[1];};
-    void save();
-    void load();
+    void save(std::fstream & plik);
+    void load(std::fstream & plik);
     void prezentujsie();
 };
 #endif /* event_h */

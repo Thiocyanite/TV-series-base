@@ -11,38 +11,22 @@
 #include "blad.h"
 #include <fstream>
 
-void ogladadlo::save(){
+void ogladadlo::save(std::fstream & plik){
     try {
-        std::fstream plik;
-        plik.open("seriale.txt", std::ios::out);
-        if (plik.fail()){
-            blad<std::string> bl;
-            bl.setmessage("Nie udało się otworzyć pliku.\n");
-            throw bl;}
-    plik<<typ<<"\n"<<nazwa<<"\n"<<gatunek<<"\n"<<CzasTrwania<<"\n"<<ocena<<"\n";
-        plik.close();
+  plik<<typ<<"\n"<<nazwa<<"\n"<<gatunek<<"\n"<<CzasTrwania<<"\n"<<ocena<<"\n";
         
-    } catch (blad<std::string> bl) {
-        bl.showyourself();
+    } catch (...) {
         blad<int> wyzszyblad;
         wyzszyblad.setmessage(-1);
         throw wyzszyblad; //wyrzuca wyjątek na wyższy poziom
     }
 }
 
-void ogladadlo::load(){
+void ogladadlo::load(std::fstream & plik){
     try {
-        std::fstream plik;
-        plik.open("seriale.txt",std::ios::in);
-        if (plik.fail()){
-            blad<std::string> bl;
-            bl.setmessage("Nie udało się otworzyć pliku.\n");
-            throw bl;
-        }
+        
         plik>>nazwa>>gatunek>>CzasTrwania>>ocena;
-        plik.close();
-    } catch (blad<std::string> bl) {
-        bl.showyourself();
+    } catch (...) {
         blad<int> wyzszyblad;
         wyzszyblad.setmessage(-1);
         throw wyzszyblad;

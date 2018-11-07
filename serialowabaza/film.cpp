@@ -9,17 +9,10 @@
 #include <stdio.h>
 #include <fstream>
 #include "film.h"
-void film::save(){
+void film::save(std::fstream & plik){
     try {
-        ogladadlo::save();
-        std::fstream plik;
-        plik.open("seriale.txt",std::ios::out);
-        if (plik.fail()){
-            blad<std::string> bl;
-            bl.setmessage("Nie udało się otworzyć pliku.\n");
-            throw bl;}
-        plik<<PEGI;
-        plik.close();
+        ogladadlo::save(plik);
+        plik<<PEGI<<"\n";
     } catch (blad<std::string> bl) {
         bl.showyourself();
         blad<int> wyzszyblad;
@@ -33,17 +26,12 @@ void film::save(){
     }
 }
 
-void film::load(){
+void film::load(std::fstream & plik){
     try {
-        ogladadlo::load();
-        std::fstream plik;
-        plik.open("seriale.txt",std::ios::in);
-        if (plik.fail()){
-                blad<std::string> bl;
-                bl.setmessage("Nie udało się otworzyć pliku.\n");
-                throw bl;}
+        ogladadlo::load(plik);
+        
         plik>>PEGI;
-            plik.close();
+
         } catch (blad<std::string> bl) {
             bl.showyourself();
             blad<int> wyzszyblad;
@@ -65,6 +53,5 @@ void film::prezentujsie(){
 
 void film::setinfo(std::string name, std::string gat, double EpisodeTime, int wiek){
     ogladadlo::setinfo(name, gat, EpisodeTime);
-    typ='F';
     PEGI=wiek;
 }
