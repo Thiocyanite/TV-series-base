@@ -27,7 +27,7 @@ void event::setinfo(std::string name, std::string type, double time, int dzien, 
 void event::load(std::fstream & plik){
     try {
 
-        plik>>nazwa>>typ>>CzasTrwania>>data[0]>>data[1];
+        plik>>nazwa>>typ>>CzasTrwania>>data[0]>>data[1]>>cena;
         if (nazwa==""||typ==""||CzasTrwania==0||data[0]==0||data[1]==0){
             blad<std::string> bl;
             bl.setmessage("Nie zaladowano poprawnie wydarzenia.\n");
@@ -44,7 +44,7 @@ void event::load(std::fstream & plik){
 
 void event::save(std::fstream & plik){
     try {
-plik<<"E\n"<<nazwa<<"\n"<<typ<<"\n"<<CzasTrwania<<"\n"<<data[0]<<"\n"<<data[1]<<"\n";
+plik<<"E\n"<<nazwa<<"\n"<<typ<<"\n"<<CzasTrwania<<"\n"<<data[0]<<"\n"<<data[1]<<"\n"<<cena<<"\n";
     } catch (...) {
         blad<int> wyzszyblad;
         wyzszyblad.setmessage(-1);

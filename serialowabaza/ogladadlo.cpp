@@ -13,12 +13,12 @@
 
 void ogladadlo::save(std::fstream & plik){
     try {
-  plik<<typ<<"\n"<<nazwa<<"\n"<<gatunek<<"\n"<<CzasTrwania<<"\n"<<ocena<<"\n";
+  plik<<nazwa<<"\n"<<gatunek<<"\n"<<CzasTrwania<<"\n"<<ocena<<"\n";
         
     } catch (...) {
         blad<int> wyzszyblad;
         wyzszyblad.setmessage(-1);
-        throw wyzszyblad; //wyrzuca wyjątek na wyższy poziom
+        throw wyzszyblad; //Wyrzuca wyjątek na wyższy poziom
     }
 }
 

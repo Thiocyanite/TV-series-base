@@ -17,36 +17,65 @@
 #include "event.h"
 #include <vector>
 
-void baza::wczytajuzytkownika(std::string nazwa){
-    aktualny=new uzytkownik;
-    aktualny->setinfo(nazwa);
-    aktualny->load();
-}
-
-void baza::stworzuzytkownika(std::string nazwa){
-    if (aktualny!=nullptr)
-        delete aktualny;
-    aktualny=new uzytkownik;
-    aktualny->setinfo(nazwa);
-    std::cout<<"Podaj ilość wolnych godzin, od poniedziałku do piątku\n";
-    double T[7];
-    for (int i=0; i<7; i++) {
-        std::cin>>T[i];
+void baza::wczytajwszystko(){
+    try{
+        std::fstream plik;
+        char pom;
+        int licznosc;
+        plik.open("seriale.txt",std::ios::in);
+        if (plik.fail()){
+            blad<std::string> bl;
+            bl.setmessage("Nie udało się otworzyć pliku.\n");
+            throw bl;
+        }
+        plik>>licznosc;
+        for (int i=0;i<licznosc;i++){
+            plik>>pom;
+            switch (pom) {
+                case 'F':{
+                    std::shared_ptr<film> ptrf(new(film));
+                    ptrf->load(plik);
+                    PulaStalych.push_back(ptrf);
+                    break;}
+                case 'E':{
+                    std::shared_ptr<event> ptre(new(event));
+                    ptre->load(plik);
+                    Wydarzenia.push_back(ptre);
+                    break;}
+                case 'T':{
+                    std::shared_ptr<trwajacy> ptrt(new(trwajacy));
+                    ptrt->load(plik);
+                    PulaStalych.push_back(ptrt);
+                    break;}
+                case 'Z':{
+                    std::shared_ptr<zakonczony> ptrz (new(zakonczony));
+                    ptrz->load(plik);
+                    PulaStalych.push_back(ptrz);
+                    break;}
+                default:{
+                    std::cerr<<"Znaleziono niezidntyfikowany typ.\n";
+                    break;}
+            }
+        }
     }
-    aktualny->changehours(T);
+    catch(blad<std::string> bl){
+        bl.showyourself();
+    }
+    catch(...){
+        std::cerr<<"Problem wystąpił, jednak nie wpłynął on na pracę programu. \n";
+    }
 }
-
 
 void baza::zapiszwszystko(){
     std::fstream plik;
     plik.open("seriale.txt",std::ios::out);
+    plik<<(Wydarzenia.size()+PulaStalych.size())<<"\n";
     std::vector<std::shared_ptr<ogladadlo>>::iterator iter;
     for (iter=PulaStalych.begin();iter!=PulaStalych.end();++iter)
         (*iter)->save(plik);
     std::vector<std::shared_ptr<event>>::iterator itek;
     for(itek=Wydarzenia.begin();itek!=Wydarzenia.end();++itek)
         (*itek)->save(plik);
-    aktualny->save();
 }
 
 void baza::gatunek(std::string gat){
@@ -75,26 +104,25 @@ void baza::wszystkieeventy(){
     for (iter=Wydarzenia.begin();iter!=Wydarzenia.end();++iter)
         (*iter)->prezentujsie();
 }
-
-
 void baza::statystyki(){
-    int seriale=0, filmy=0, trwajace=0, zakonczone=0;
     std::cout<<"W bazie jest:\n";
-    std::cout<<Wydarzenia.size()<<" wydarzeń \n";
+    std::cout<<Wydarzenia.size()<<" wydarzeń,\n";
+    int filmy=0,trwajace=0,zakonczone=0;
     std::vector<std::shared_ptr<ogladadlo>>::iterator iter;
-    for(iter=PulaStalych.begin();iter!=PulaStalych.end();++iter){
-        if ((*iter)->gettype()=='F') filmy++;
-        else{
-            seriale++;
-            if ((*iter)->gettype()=='Z') zakonczone++;
-            else trwajace++;
+    for (iter=PulaStalych.begin();iter!=PulaStalych.end();++iter){
+        if (((*iter)->gettype())=='F')
+            filmy++;
+        else {
+            if (((*iter)->gettype())=='T')
+                trwajace++;
+            else zakonczone++;
         }
     }
-    std::cout<<filmy<<"filmów \n"<<seriale<<" seriali, w tym: \n"<<zakonczone<<" zakończone i "<<trwajace<<" trwających.\n";
+    std::cout<<filmy<<" filmów,\n"<<(trwajace+zakonczone)<<" seriali, w tym: "<<zakonczone<<" zakończonych i "<<trwajace<<" emitowanych.\n";
 }
 
 void baza::dodajwydarzenie(){
-    std::shared_ptr<event> wskaznik;
+    std::shared_ptr<event> wskaznik (new (event));
     std::string nazwa,typ;
     int data[2];
     double cena, czas;
@@ -116,7 +144,7 @@ void baza::dodajogladadlo(){
     if (pom=='F'){
         std::cout<<"Wprowadź ograniczenie wiekowe [minimalny wiek]\n";
         std::cin>>cyfry;
-        std::shared_ptr<film> wskaznik;
+        std::shared_ptr<film> wskaznik (new(film));
         wskaznik->setinfo(nazwa, gatunek, Czas, cyfry);
         wskaznik->setnote(ocena);
         PulaStalych.push_back(wskaznik);}
@@ -126,7 +154,7 @@ void baza::dodajogladadlo(){
         if (pom=='T'){
             std::cout<<"Podaj ilość wyemitowanych odcinków.\n";
             std::cin>>cyfry;
-            std::shared_ptr<zakonczony> wskaznik;
+            std::shared_ptr<zakonczony> wskaznik (new(zakonczony));
             wskaznik->setinfo(nazwa, gatunek, Czas);
             wskaznik->setepisodes(cyfry);
             wskaznik->setnote(ocena);
@@ -139,7 +167,7 @@ void baza::dodajogladadlo(){
             std::cout<<"Wprowadź dni emisji. [0-poniedziałek]\n";
             for (int i=0;i<cyfry;i++)
                 std::cin>>tab[i];
-            std::shared_ptr<trwajacy> wskaznik;
+            std::shared_ptr<trwajacy> wskaznik (new(trwajacy));
             wskaznik->setinfo(nazwa, gatunek, Czas);
             wskaznik->setemission(cyfry, tab);
             wskaznik->setnote(ocena);

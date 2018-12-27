@@ -12,6 +12,7 @@
 
 void trwajacy::setemission(int n, int T[]){
     IloscOdcinkowTygodniowo=n;
+    typ='T';
     DniEmisji=new int[IloscOdcinkowTygodniowo];
     for (int i=0;i<IloscOdcinkowTygodniowo;i++)
         DniEmisji[i]=T[i];
@@ -20,6 +21,7 @@ void trwajacy::setemission(int n, int T[]){
 
 void trwajacy::save(std::fstream & plik){
     try {
+        plik<<"T\n";
         serial::save(plik);
         plik<<IloscOdcinkowTygodniowo<<"\n";
         for(int i=0;i<IloscOdcinkowTygodniowo;i++)
@@ -34,6 +36,7 @@ void trwajacy::save(std::fstream & plik){
 }
 void trwajacy::load(std::fstream & plik){
     serial::load(plik);
+    typ='T';
     plik>>IloscOdcinkowTygodniowo;
     DniEmisji= new int[IloscOdcinkowTygodniowo];
     for (int i=0; i<IloscOdcinkowTygodniowo;i++)

@@ -9,9 +9,11 @@
 #ifndef serial_h
 #define serial_h
 #include"ogladadlo.h"
+#include <fstream>
 class serial:public ogladadlo{
 public:
-    void prezentujsie();
+    virtual void prezentujsie();
+    virtual void save(std::fstream &plik);
     
 };
 #endif /* serial_h */

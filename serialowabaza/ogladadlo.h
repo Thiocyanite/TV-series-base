@@ -19,21 +19,21 @@ protected:
     double ocena;
     char typ;
 public:
-    void setinfo(std::string name, std::string gat, double EpisodeTime);
-    void setnote(double note){if (ocena>=0&&ocena<=10) ocena=note;};
+    virtual void setinfo(std::string name, std::string gat, double EpisodeTime);
+    virtual void setnote(double note){if (ocena>=0&&ocena<=10) ocena=note;};
     double getnote(){return ocena;};
     double gettime(){return CzasTrwania;};
     std::string getspiese(){return gatunek;};
     std::string getname() {return nazwa;};
-    char gettype(){return typ;}
     virtual void save(std::fstream & plik);
     virtual void load(std::fstream & plik);
+    virtual char gettype(){return typ;};
     bool operator<(ogladadlo const &q)const {return ocena<q.ocena;};
     bool operator<=(ogladadlo const &q)const {return ocena<=q.ocena;};
     bool operator>(ogladadlo const &q)const {return ocena>q.ocena;};
     bool operator>=(ogladadlo const &q)const {return ocena>=q.ocena;};
     bool operator==(ogladadlo const &q)const {return ocena==q.ocena;};
-    void prezentujsie();
+    virtual void prezentujsie();
 };
 
 

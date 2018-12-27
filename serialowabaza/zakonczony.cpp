@@ -13,6 +13,7 @@
 
 void zakonczony::save(std::fstream & plik){
     try {
+        plik<<"Z\n";
         serial::save(plik);
         plik<<IloscWyemitowanychOdcinkow<<"\n";
     }
@@ -24,6 +25,7 @@ void zakonczony::save(std::fstream & plik){
 }
 void zakonczony::load(std::fstream & plik){
     serial::load(plik);
+    typ='Z';
     plik>>IloscWyemitowanychOdcinkow;
 }
 

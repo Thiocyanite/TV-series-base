@@ -9,7 +9,7 @@
 #ifndef event_h
 #define event_h
 
-class event{ //działa poza load
+class event{ 
 private:
     std::string nazwa;
     std::string typ;

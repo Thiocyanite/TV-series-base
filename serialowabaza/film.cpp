@@ -11,6 +11,7 @@
 #include "film.h"
 void film::save(std::fstream & plik){
     try {
+        plik<<"F\n";
         ogladadlo::save(plik);
         plik<<PEGI<<"\n";
     } catch (blad<std::string> bl) {
@@ -29,7 +30,7 @@ void film::save(std::fstream & plik){
 void film::load(std::fstream & plik){
     try {
         ogladadlo::load(plik);
-        
+        typ='F';
         plik>>PEGI;
 
         } catch (blad<std::string> bl) {
@@ -53,5 +54,6 @@ void film::prezentujsie(){
 
 void film::setinfo(std::string name, std::string gat, double EpisodeTime, int wiek){
     ogladadlo::setinfo(name, gat, EpisodeTime);
+    typ='F';
     PEGI=wiek;
 }

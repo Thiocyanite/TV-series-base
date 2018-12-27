@@ -9,11 +9,11 @@
 #ifndef trwajacy_h
 #define trwajacy_h
 #include"serial.h"
-class trwajacy: public serial { //działa poza load
+class trwajacy: public serial { 
 private:
     int IloscOdcinkowTygodniowo;
     int* DniEmisji;
-    char typ = 'T';
+    char typ;
 public:
     void setemission(int n, int T[]);
     void save(std::fstream & plik);
@@ -21,6 +21,7 @@ public:
     trwajacy(){};
     ~trwajacy(){delete DniEmisji;};
     void prezentujsie();
+    char gettype(){return 'Z';}
 };
 
 #endif /* trwajacy_h */

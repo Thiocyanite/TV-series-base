@@ -13,12 +13,13 @@
 class film:public ogladadlo{
 private:
     int PEGI;
-    char typ='F';
+    char typ;
 public:
     void save(std::fstream & plik);
     void load(std::fstream & plik);
     void prezentujsie();
     void setinfo(std::string name, std::string gat, double EpisodeTime, int wiek);
+    char gettype(){return 'F';}
 };
 
 #endif /* film_h */

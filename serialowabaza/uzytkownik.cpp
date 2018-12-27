@@ -8,11 +8,19 @@
 
 #include <stdio.h>
 #include <fstream>
-
 #include "uzytkownik.h"
-#include "baza.h"
-#include "event.h"
+#include <string>
 
+
+void uzytkownik::changehours(){
+    std::cout<<"Wprowadź ilość wolnych godzin od poniedziałku do niedzieli. \n";
+    for (int i=0;i<7;i++)
+        std::cin>>IloscWolnychGodzin[i];
+}
+
+void uzytkownik::setinfo(std::string name){
+    nazwa=name;
+}
 
 void uzytkownik::codzisogladaczeventem(int dzientygodnia, int dzienmiesiaca, int miesiac){
     double zuzyte=0;
@@ -31,21 +39,33 @@ void uzytkownik::codzisogladaczeventem(int dzientygodnia, int dzienmiesiaca, int
     
 }
 
-void uzytkownik::codzisogladac(int dzien, double zuzyty){
-    double wolnegodziny=IloscWolnychGodzin[dzien]-zuzyty;
-    std::cout<<"Dziś możesz obejrzeć:\n";
-    std::vector<std::shared_ptr<ogladadlo>>::iterator iter;
-    if ((*iter)->gettype()=='F'&&(*iter)->gettime()<=wolnegodziny)
-    {
-        std::cout<<"Film: "<<(*iter)->getname()<<", ";
-        wolnegodziny-=(*iter)->gettime();
-    }
-    else if ((*iter)->gettime()>=wolnegodziny){
-        int odcinki=0;
-        while(wolnegodziny>=(*iter)->gettime()){
-            odcinki++;
-            wolnegodziny-=(*iter)->gettime();}
-        std::cout<<odcinki<<" odcinków serialu "<<(*iter)->getname()<<", ";
+void uzytkownik::codzisogladac(int dzien, double zuzyty){ //Zapytać Dominika
+    try {
+        double wolnegodziny=IloscWolnychGodzin[dzien]-zuzyty;
+        std::cout<<"Dziś możesz obejrzeć:\n";
+        if (DoObejrzenia.empty()){
+            blad<std::string> bl;
+            bl.setmessage("Nie masz nic w śledzonych!\n");
+            throw bl;
+        }
+
+        for(std::vector<std::shared_ptr<ogladadlo>>::iterator iter=DoObejrzenia.begin(); iter!=DoObejrzenia.end();++iter) 
+        {
+        if (((*iter)-> gettype()) == 'F' && ((*iter)->gettime()) >= wolnegodziny)
+        {
+            std::cout<<"Film: "<<(*iter)->getname()<<", ";
+            wolnegodziny-=((*iter)->gettime());
+        }
+        else if ( ((*iter)->gettime()) >= 0){
+            int odcinki=0;
+            while(wolnegodziny>=((*iter)->gettime())){
+                odcinki++;
+                wolnegodziny-=(*iter)->gettime();}
+            if (odcinki>0)
+            std::cout<<odcinki<<" odcinków serialu "<<(*iter)->getname()<<", ";
+        }}
+    } catch (blad<std::string> bl) {
+        bl.showyourself();
     }
     std::cout<<"\n";
 }
@@ -58,7 +78,7 @@ void uzytkownik::usunogladadlo(std::string nazwa){
 }
 
 
-void uzytkownik::dodajevent(baza bazadanych, std::string nazwa){
+void uzytkownik::dodajevent(baza &bazadanych, std::string nazwa){
     std::vector<std::shared_ptr<event>>::iterator iter;
     for (iter=bazadanych.Wydarzenia.begin(); iter!=bazadanych.Wydarzenia.end(); ++iter)
     {if ((*iter)->getname()==nazwa)
@@ -66,7 +86,7 @@ void uzytkownik::dodajevent(baza bazadanych, std::string nazwa){
     }
 }
 
-void uzytkownik::dodajogladane(baza bazadanych, std::string nazwa){
+void uzytkownik::dodajogladane(baza &bazadanych, std::string nazwa){
     std::vector<std::shared_ptr<ogladadlo>>::iterator iter;
     for(iter=bazadanych.PulaStalych.begin();iter!=bazadanych.PulaStalych.end();++iter)
         if ((*iter)->getname()==nazwa)
@@ -77,7 +97,7 @@ void uzytkownik::dodajogladane(baza bazadanych, std::string nazwa){
 void uzytkownik::save(){
     try {
         std::fstream plik;
-        plik.open(nazwa, std::ios::out);
+        plik.open(nazwa, std::ios::out); //przez tą linijkę prawdopodobnie nie uruchomi się na Windowsie - plik bez rozszerzenia (a jest to dość wygodne rozwiązanie).
         if (plik.fail()){
             blad<std::string> bl;
             bl.setmessage("Nie udało się otworzyć pliku.\n");
@@ -86,25 +106,23 @@ void uzytkownik::save(){
         for(int i=0; i<7;i++){
             plik<<IloscWolnychGodzin[i]<<"\n";
         }
-        plik<<DoObejrzenia.size();
+        plik<<DoObejrzenia.size()<<"\n";
         std::vector<std::shared_ptr<ogladadlo>>::iterator iter;
         for (iter=DoObejrzenia.begin();iter!=DoObejrzenia.end();++iter){
             plik<<(*iter)->getname()<<"\n";
         }
-        plik<<OplaconeEventy.size();
+        plik<<OplaconeEventy.size()<<"\n";
         std::vector<std::shared_ptr<event>>::iterator itek;
         for(itek=OplaconeEventy.begin();itek!=OplaconeEventy.end();++itek){
             plik<<(*itek)->getname()<<"\n";
         }
         plik.close();
     } catch (blad<std::string> bl) {
-        blad<int> wyzszyblad;
-        wyzszyblad.setmessage(-1);
-        throw wyzszyblad;
+        bl.showyourself();
     }
 }
 
-void uzytkownik::load(){
+void uzytkownik::load(baza &bazadanych){
     try {
         std::fstream plik;
         plik.open(nazwa, std::ios::in);
@@ -117,12 +135,43 @@ void uzytkownik::load(){
             plik>>IloscWolnychGodzin[i];
         int pom;
         plik>>pom;
-        while (pom!=EOF) {
-            if (pom=='F'){
-                
+        std::string tytul;
+        bool flaga;
+        for (int i=0;i<pom;i++){
+            plik>>tytul;
+            std::vector<std::shared_ptr<ogladadlo>>::iterator iter;
+            flaga=false;
+            for (iter=bazadanych.PulaStalych.begin();iter!=bazadanych.PulaStalych.end();++iter){
+                if ((*iter)->getname()==tytul){
+                    DoObejrzenia.push_back(*iter);
+                    flaga=true;
+                }
+                if (!flaga){
+                    blad<std::string> bl;
+                    bl.setmessage("Nie udało się znaleść nic o tej nazwie.\n");
+                    bl.showyourself(); //Nie zrobi to nic złego, więc tylko poinformuje użyszkodnika o tym, że coś mogło mu zniknąć.
+                }
+            }
+        }
+        plik>>pom;
+        for (int i=0; i<pom;i++){
+            plik>>tytul;
+            std::vector<std::shared_ptr<event>>::iterator iter;
+            flaga=false;
+            for (iter=bazadanych.Wydarzenia.begin(); iter!=bazadanych.Wydarzenia.end();++iter){
+                if ((*iter)->getname()==tytul){
+                    OplaconeEventy.push_back(*iter);
+                    flaga=true;
+                }
+            }
+            if (!flaga){
+                blad<std::string> bl;
+                bl.setmessage("Nie udało się znaleść nic o tej nazwie.\n");
+                bl.showyourself();
             }
         }
         
+        plik.close();
         
     } catch (blad<std::string> bl) {
         blad<int> wyzszyblad;

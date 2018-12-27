@@ -12,3 +12,7 @@ void serial::prezentujsie(){
     ogladadlo::prezentujsie();
     std::cout<<"Jest to serial o średniej ocen "<<ocena<<". Czas trwania pojedynczego odcinka wynosi "<<CzasTrwania<<"h.";
 }
+
+void serial::save(std::fstream &plik){
+    ogladadlo::save(plik);
+}
